@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="fn()">原生ajax</button>
+
+    <script>
+
+        function fn() {
+            // 1.创建ajax对象（做兼容）
+            let xhr = new XMLHttpRequest() || ActiveXObject("Microsoft.XMLHTTP");
+
+            // 2.建立与服务器的连接(只能是当前页面所在的服务器，或者是跨域没有限制的服务器)
+            //当前页面的服务器：localhost:9999/index.html
+            // localhost:9999/test.json
+            xhr.open("GET", "test.json");
+
+            // 3.发送网络请求的数据包
+            xhr.send();
+
+            // 4.事件 监听网络请求整个过程的状态
+            // xhr.readyState   0未初始化 1建立连接 2发送请求 3服务器处理请求 4服务器响应数据
+            xhr.onreadystatechange = function () {
+                // 只要readyState 的值为4，表示客户端一定接收了数据
+                // status 表示数据包的状态，接收到的数据可能不是想要的
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // 5.后端给前端响应数据
+                    console.log(xhr.responseText);
+
+                    // 6.setDataToUI
+                    // DOM  jQuery  Vue  React  wx
+                    let h1 = document.createElement("h1");
+                    h1.innerHTML = xhr.responseText;
+                    document.body.appendChild(h1);
+                }
+            }
+        }
+
+    </script>
+</body>
+
+</html>

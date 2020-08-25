@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>标题</h1>
+    <script src="./myjq.js"></script>
+    <button onclick="ajax()">ajax</button>
+    <button onclick="jsonp()">jsonp</button>
+    <script>
+        // $.ajax({
+        //     method: "",
+        //     url: "",
+        //     success: function(){}
+        // })
+        // $.get()
+        // $.post()
+        // $.getJSON()
+
+        function ajax() {
+            myjq.getAjax("http://localhost:9999/ajax.json", (data) => {
+                console.log(data);
+            })
+        }
+
+        function jsonp() {
+            myjq.getJSON("http://localhost:9999/jsonp.json?cb=?", (data) => {
+                console.log(data);
+            })
+        }
+    </script>
+</body>
+
+</html>

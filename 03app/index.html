@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <!-- src: 1.加载资源 下载数据
+         2. 把数据包用V8引擎执行 -->
+    <!-- <script src="1.js"></script> -->
+    
+    <button onclick="get()">jsonp</button>
+
+    <script>
+        function xx(data) {
+            console.log(data);
+        }
+
+        function get() {
+            let sc = document.createElement("script");
+            sc.src = "http://localhost:9999/test.jsonp?cb=xx"; //xx({})
+            document.body.appendChild(sc);
+        }
+    </script>
+</body>
+</html>

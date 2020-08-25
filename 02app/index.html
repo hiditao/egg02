@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="getJson()">jsonp</button>
+    <script>
+        // 1.创建一个全局函数，等着被调用
+        function xxx(data) {
+            console.log(data);
+        }
+
+        function getJson() {
+            // 2.创建script标签
+            let sc = document.createElement("script");
+            // http://localhost:9999/test.jsonp
+            // 3.这句代码一执行，浏览器就会发送网络请求
+            // callback=xxx传递参数，参数决定了后端使用什么函数名
+            sc.src = "http://localhost:9999/test.jsonp?callback=xxx"; //以字符串返回一个函数
+
+            // 4.把节点加入文档树
+            document.body.appendChild(sc);
+        }
+
+
+    </script>
+
+    <!-- <script src="http://localhost:9999/test.jsonp"></script> -->
+    <!-- <script src="test.js"></script> -->
+
+
+
+</body>
+
+</html>
