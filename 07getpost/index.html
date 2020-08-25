@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    
+    <button onclick="getAjax()">get请求不带参数</button>
+    <button onclick="getAjax2()">get请求在url之后携带参数</button>
+    <button onclick="getAjax3()">get请求使用data属性携带参数</button> <br /></br />
+
+    <form>
+        <input type="text" id="username" placeholder="用户名"><br>
+        <input type="password" id="passwd" placeholder="密码"><br>
+        <input type="submit" value="登录">
+    </form>
+
+    <script>
+        window.onload = function(){
+            document.forms[0].addEventListener("submit", function(event) {
+                event.preventDefault(); //阻止浏览器默认行为，阻止表单提交
+
+                let name = document.getElementById("username").value;
+                let pwd = document.getElementById("passwd").value;
+                console.log(name, pwd)
+                // $.ajax({
+                //     method: "POST",
+                //     url: "http://localhost:9999/login",
+                //     data: {
+                //         myname: name,  
+                //         mypwd: pwd
+                //     },
+                //     success: function(data) {
+                //         console.log(data);
+                //     },
+                //     error: function(err) {
+                //         console.log(err);
+                //     }
+                // })
+                $.post("http://localhost:9999/login", {myname: name, mypwd: pwd}, function(data) {
+                    console.log(data);
+                })
+
+            })
+        }
+
+
+        function getAjax() {
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:9999/index",
+                success: function(data) {
+                    console.log(data)
+                },
+                error: function(err) {
+                    console.error(err)
+                } 
+            })
+        }
+        
+        function getAjax2() {
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:9999/myparams?name=aa&pwd=123",
+                success: function(data) {
+                    console.log(data)
+                },
+                error: function(err) {
+                    console.error(err)
+                } 
+            })
+        }
+
+        function getAjax3() {
+            $.ajax({
+                method: "GET",
+                url: "http://localhost:9999/three",
+                data: {
+                    msg: "hahaha",
+                    age: 18
+                },
+                success: function(data) {
+                    console.log(data)
+                },
+                error: function(err) {
+                    console.error(err)
+                } 
+            })
+        }
+
+    </script>
+
+</body>
+</html>
